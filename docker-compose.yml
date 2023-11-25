@@ -1,0 +1,37 @@
+version: '3'
+services:
+  springboot-app:
+    image: notes
+    restart: always
+    build: ./notes
+    ports:
+      - 8080:8080 
+    environment:
+      MYSQL_HOST: mysql-db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_PORT: 3306
+    depends_on :
+      - mysql-db
+      
+  mysql-db:
+    container_name: mysql-db
+    image: mysql:5.7.44 # Utilisez la version spécifique de MySQL
+    environment:
+      MYSQL_DATABASE: notedb
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306" # Port MySQL
+  phpmyadmin-auth:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8090:80
+    environment:
+      - PMA_ARBITRARY=1
+  angular-app:
+    image: frontNotes
+    restart : always
+    build : ./frontNotes
+    ports : 
+      - 4200:4200
