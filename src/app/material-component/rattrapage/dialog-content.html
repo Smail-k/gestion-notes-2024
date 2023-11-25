@@ -1,0 +1,24 @@
+<!-- <div class="d-flex no-block align-items-center b-b m-b-30 p-b-15">
+  <h4 class="font-medium m-b-0 m-t-0">Liste des matières</h4>
+</div> -->
+<!-- <h2 mat-dialog-title>Row Action :: <strong>{{action}}</strong></h2> -->
+<mat-dialog-content class="mat-typography" *ngIf="action !== 'Delete'; else elseTemplate">
+  <div > 
+    <mat-table [dataSource]='dataSource' matSort>
+    <ng-container matColumnDef="nom"> 
+        <mat-header-cell *matHeaderCellDef mat-sort-header> <b> Matières à rattraper </b> </mat-header-cell>
+        <mat-cell *matCellDef="let etudiant">{{etudiant}} </mat-cell>
+    </ng-container>
+    
+    <mat-header-row *matHeaderRowDef= "displayedColumns" > </mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"> </mat-row>
+    </mat-table>  
+    <!-- <mat-paginator [pageSizeOptions]="[5,10,25,100]" [pageSize]="10" showFirstLastButtons> </mat-paginator>  -->
+    </div>
+
+</mat-dialog-content>
+<ng-template #elseTemplate> Etes-vous sûr de vouloir supprimer cette ligne? </ng-template>
+<div mat-dialog-actions align="end">
+  <!-- <button mat-button (click)="doAction()" color="warn">{{action}}</button> -->
+  <button mat-button (click)="closeDialog()" mat-flat-button>Cancel</button>
+</div>

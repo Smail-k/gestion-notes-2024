@@ -1,0 +1,74 @@
+
+<h3 color="primary">Mobilité</h3>
+
+<mat-card >
+<mat-card-content >
+    <form class="form-horizontal" [formGroup]="form" (ngSubmit)="onAdd()">
+
+        <mat-form-field class="exemple-form">
+          <mat-label for="inputType">Type</mat-label>
+          <mat-select formControlName="type" placeholder="Type">
+            <mat-option value="1">Etude</mat-option>
+            <mat-option value="2">Stage</mat-option>
+            <mat-option value="3">Autre</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="exemple-form">
+          <mat-label for="inputPays">Pays</mat-label>
+          <input type="text" matInput formControlName="pays" placeholder="Pays">
+          <mat-icon matSuffix> </mat-icon>
+        </mat-form-field>
+      
+        <mat-form-field class="exemple-form">
+          <mat-label for="inputVille">Ville</mat-label>
+          <input type="text" matInput formControlName="ville" placeholder="Ville">
+          <mat-icon matSuffix> </mat-icon>
+        </mat-form-field>
+        <mat-form-field class="exemple-form">
+            <mat-label for="inputAnnee">Année universitaire</mat-label>
+            <input type="text" matInput formControlName="annee" placeholder="annee universitaire">
+            <mat-icon matSuffix> </mat-icon>
+          </mat-form-field>
+        <mat-form-field class="exemple-form">
+          <mat-label for="inputNbrSem">Nombre de semaines</mat-label>
+          <input type="text" matInput formControlName="nbrSem" placeholder="Nombre de semaines">
+          <mat-icon matSuffix> </mat-icon>
+        </mat-form-field>
+      
+       
+      
+        <!-- Afficher le champ "societe" uniquement lorsque le type est "stage" -->
+        <mat-form-field class="exemple-form" *ngIf="form.get('type')?.value == 2">
+          <mat-label for="inputSociete">Societe</mat-label>
+          <input type="text" matInput formControlName="societe" placeholder="Societe">
+          <mat-icon matSuffix> </mat-icon>
+        </mat-form-field>
+      
+        <mat-form-field class="exemple-form">
+          <mat-label for="inputDateDebut">Date Début</mat-label>
+          <input type="date" matInput formControlName="dateDepart" placeholder="Date Depart">
+          <mat-icon matSuffix> </mat-icon>
+        </mat-form-field>
+      
+        <mat-form-field class="exemple-form">
+          <mat-label for="inputDateFin">Date Fin</mat-label>
+          <input type="date" matInput formControlName="dateRetour" placeholder="Date Retour">
+          <mat-icon matSuffix> </mat-icon>
+        </mat-form-field>
+        <mat-form-field class="exemple-form">
+            <mat-label for="inputDescription">Description</mat-label>
+            <textarea matInput formControlName="description" placeholder="Description"></textarea>
+            <mat-icon matSuffix> </mat-icon>
+          </mat-form-field>
+        
+          
+        <br><br> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+        <button mat-raised-button type="submit" color="primary" *ngIf="!mobilite"> Ajouter </button>
+
+      </form>
+      
+
+
+</mat-card-content>
+</mat-card>

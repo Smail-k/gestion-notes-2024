@@ -1,0 +1,122 @@
+<div fxLayout="row">
+
+    <div fxFlex.gt-sm="100%">
+        <mat-card>
+            <mat-card-content>
+                <mat-card-title>LISTE DES ETUDIANTS</mat-card-title><br>
+<form class="form-horizontal" name="form" [formGroup]="form" (ngSubmit)="onSubmit();">  
+
+                <mat-form-field  style="width:15%">
+                    <mat-label>Promotions</mat-label>
+                    <select matNativeControl class="custom-select" formControlName="selectedPromotion" >
+                      <option >3afise</option>
+                      <option >3afisa</option>
+                      <option >4afise</option>
+                      <option >4afisa</option>
+                      <option >5afise</option>
+                      <option >5afisa</option>
+                    </select>
+                    <mat-error *ngIf="f.selectedPromotion.errors?.required">
+                        Promotion est <strong>obligatoire</strong>
+                      </mat-error>
+                     
+                </mat-form-field>
+                &nbsp;&nbsp;
+
+                <mat-form-field class="exemple-form" style="width:25%">
+                    <input type="text" matInput   formControlName="anneeU"  placeholder="Annee Universitaire aaaa/aaaa "   >
+                    <mat-icon matSuffix> </mat-icon>
+                    <mat-error *ngIf = "f.anneeU.errors?.required">
+                        Annee universitaire est <strong> obligatoire</strong>
+                        </mat-error>
+                        <mat-error *ngIf = "f.anneeU.errors?.pattern && f.anneeU.touched">
+                            Veuillez saisir une Annee valide
+                        </mat-error> 
+                   </mat-form-field> 
+
+                &nbsp;&nbsp;
+                <button mat-raised-button color="primary" (click)="FileInput.click()">
+                    <mat-icon>cloud_upload</mat-icon>
+                    Import Excel
+                    <input #FileInput  type="file" accept=".xls,.xlsx"[disabled]="f.anneeU.errors?.required || (f.anneeU.errors?.pattern && f.anneeU.touched)" (change)="onFileChanged($event)"  style="display: none" >
+                </button>
+                
+                <br>
+                &nbsp;
+                <mat-form-field  style="width:15%">
+                    <mat-label>Année Universitaire</mat-label>
+                    <select matNativeControl class="custom-select" formControlName="anneeSel" (change)="ChargerPromotions()" >
+                      <option  selected aria-readonly="true"> Selectionner</option>
+                      <option *ngFor="let anneeU of annees">{{anneeU.annee}}</option>
+                    </select>
+                </mat-form-field>
+
+                &nbsp;&nbsp;
+                <mat-form-field style="width:15%">
+                    <mat-label>Promotions</mat-label>
+                    <select matNativeControl class="custom-select" formControlName="promoSel" (change)="ListerEtudiantFiltrer()" >
+                        <option  selected aria-readonly="true"> Selectionner</option>
+                      <option  *ngFor="let promotion of promotions_Annee" >{{promotion}}</option>
+                    </select>
+                </mat-form-field>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <mat-form-field class="search-form-field" floatLabel="never" style="width: 20%;">
+                    <input matInput formControlName= "searchKey" placeholder="Recherche" autocomplete="off" (keyup)="applyFilter()">
+                 
+                </mat-form-field>
+                &nbsp;&nbsp;
+                <button mat-raised-button color="primary" (click)="ajouter()">
+                    <mat-icon>person_add</mat-icon>
+                </button>
+                &nbsp;
+            
+</form>
+               
+              
+             
+
+
+    <div class="mat-elevation-z8"> 
+        <mat-table [dataSource]='dataSource' matSort>
+        <ng-container matColumnDef="numero"> 
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <b> Numero </b> </mat-header-cell>
+            <mat-cell *matCellDef="let etudiant">{{etudiant.numero}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="nom" > 
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <b> Nom </b> </mat-header-cell>
+            <mat-cell *matCellDef="let etudiant">{{etudiant.nom}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="prenom"> 
+            <mat-header-cell *matHeaderCellDef> <b> Prenom </b></mat-header-cell>
+            <mat-cell *matCellDef="let etudiant">{{etudiant.prenom}} </mat-cell>
+        </ng-container>
+
+            
+        <ng-container matColumnDef="actions"> 
+            <mat-header-cell *matHeaderCellDef> <b> Actions </b></mat-header-cell>
+            <mat-cell *matCellDef="let Utilisateur"> 
+
+                <button mat-icon-button color="warn">
+                    <mat-icon (click)="delete(Utilisateur)" aria-label="delete button icon">delete</mat-icon>
+                </button>
+                <button (click)="mobilite(Utilisateur)" mat-raised-button [ngClass]="{'green': Utilisateur.mobilite!=null}" value="">
+                    {{Utilisateur.mobilite != null ? 'mobilité validée' : 'mobilité'}} 
+                </button>
+            </mat-cell>
+        
+ 
+        
+        </ng-container>
+
+    
+        <mat-header-row *matHeaderRowDef= "displayedColumns" > </mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"> </mat-row>
+        </mat-table>  
+        <mat-paginator [pageSizeOptions]="[5,10,25,100]" [pageSize]="10" showFirstLastButtons> </mat-paginator> 
+        </div>
+    
+            </mat-card-content>
+            
+        </mat-card>
+    </div>
+</div>

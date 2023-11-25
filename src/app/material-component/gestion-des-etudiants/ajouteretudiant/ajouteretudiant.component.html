@@ -1,0 +1,89 @@
+
+    <h3 color="primary"> <mat-icon>person</mat-icon>
+        Ajouter un etudiant</h3>
+
+<mat-card >
+    <mat-card-content >
+        <form class="form-horizontal" name="form" [formGroup]="form" (ngSubmit)="onSubmit();onAdd()">  
+
+             
+            <mat-form-field class="exemple-form"   >
+                <mat-label>Numero</mat-label>
+                <input type="text" 
+                matInput  
+                value="{{numero}}"
+                readonly
+                >
+              </mat-form-field> 
+            
+            <mat-form-field class="exemple-form" >
+                <mat-label for="inputNom">Nom</mat-label>
+                <input type="text" matInput   formControlName="nom"  placeholder="Nom "   >
+                <mat-icon matSuffix> </mat-icon>
+                <mat-error *ngIf = "f.nom.errors?.required">
+                    Nom est <strong> obligatoire</strong>
+                    </mat-error>
+                    <mat-error *ngIf = "f.nom.errors?.pattern && f.nom.touched">
+                        Veuillez saisir un nom valide
+                    </mat-error> 
+                    <mat-icon (click)="f.nom.setValue('')"  matSuffix style="color: #1f3a93;">clear</mat-icon>
+               </mat-form-field> 
+               
+               
+               <mat-form-field class="exemple-form" >
+                <mat-label for="inputPrenom">Prenom</mat-label>
+                <input type="text" matInput   formControlName="prenom"  placeholder="Prenom"   >
+                <mat-icon matSuffix> </mat-icon>
+                <mat-error *ngIf = "f.prenom.errors?.required">
+                    Prenom est <strong> obligatoire</strong>
+                    </mat-error>
+                    <mat-error *ngIf = "f.prenom.errors?.pattern && f.nom.touched">
+                        Veuillez saisir un nom valide
+                    </mat-error> 
+                    <mat-icon (click)="f.prenom.setValue('')"  matSuffix style="color: #1f3a93;">clear</mat-icon>
+             </mat-form-field> 
+
+               
+               <mat-form-field class="exemple-form" >
+                <mat-label for="inputAE">Annee d'entrée</mat-label>
+                <input type="text" matInput   formControlName="AE"  placeholder="AE "   >
+                <mat-icon matSuffix> </mat-icon>
+                <mat-error *ngIf = "f.AE.errors?.required">
+                    Annee d'entrée est <strong> obligatoire</strong>
+                    </mat-error>
+                    <mat-error *ngIf = "f.AE.errors?.pattern && f.AE.touched">
+                        Veuillez saisir un Année d'entrée valide
+                    </mat-error> 
+                    <mat-icon (click)="f.AE.setValue('')"  matSuffix style="color: #1f3a93;">clear</mat-icon>
+               </mat-form-field>
+
+
+                <mat-form-field >
+                    <mat-label>Année Universitaire</mat-label>
+                    <select matNativeControl class="custom-select" formControlName="AU" (change)="ChargerPromotions()" >
+                      <option  selected aria-readonly="true"> Selectionner</option>
+                      <option *ngFor="let anneeU of annees">{{anneeU.annee}}</option>
+                    </select>
+                </mat-form-field>
+
+                <mat-form-field >
+                    <mat-label>Promotions</mat-label>
+                    <select matNativeControl class="custom-select" formControlName="Promo" >
+                        <option  selected aria-readonly="true"> Selectionner</option>
+                      <option  *ngFor="let promotion of promotions_Annee" >{{promotion}}</option>
+                    </select>
+                </mat-form-field>
+                
+
+            
+            <br><br> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+            <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid"> Ajouter </button>
+
+
+
+
+        </form>
+
+
+    </mat-card-content>
+</mat-card>

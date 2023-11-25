@@ -1,0 +1,71 @@
+<div class="col-sm-7">
+
+    <h3 color="primary"> <mat-icon>person</mat-icon>
+        Ajouter un utilisateur</h3>
+</div>
+
+<mat-card >
+    <mat-card-content >
+        <form class="form-horizontal" name="form" [formGroup]="form" (ngSubmit)="onSubmit();onAdd()">  
+
+             
+
+            <br>
+            <mat-form-field class="exemple-form" >
+                <mat-label for="inputnom">Nom</mat-label>
+                <input type="text" matInput   formControlName="nom"  placeholder="Nom"   >
+                <mat-icon matSuffix> </mat-icon>
+                <mat-error *ngIf = "f.nom.errors?.required">
+                    Nom est <strong> obligatoire</strong>
+                    </mat-error>
+                    <mat-error *ngIf = "f.nom.errors?.pattern && f.nom.touched">
+                        Veuillez saisir un nom valide
+                    </mat-error> 
+                    <mat-icon (click)="f.nom.setValue('')"  matSuffix style="color: #1f3a93;">clear</mat-icon>
+               </mat-form-field> 
+               <br>
+
+               <mat-form-field class="exemple-form" >
+                   <mat-label for="inputusername">Username</mat-label>
+                   <input type="text" matInput   formControlName="username"  placeholder="username"  (ngModelChange)="ChercherUsername($event)"  >
+                   <mat-icon matSuffix> </mat-icon>
+                   <mat-error *ngIf = "f.username.errors?.required">
+                       username est <strong> obligatoire</strong>
+                       </mat-error>
+                       <mat-error *ngIf = "f.username.errors?.pattern && f.nom.touched">
+                           Veuillez saisir un nom valide
+                       </mat-error> 
+                       <mat-icon (click)="f.username.setValue('')"  matSuffix style="color: #1f3a93;">clear</mat-icon>
+                  </mat-form-field> 
+                  <small *ngIf = "notfound" class="text-danger support-text" >
+                    Username <strong> existe</strong> deja
+                   </small>
+
+                <br> 
+                <mat-form-field class="exemple-form"  >
+                    <mat-label>Password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'"  
+                    formControlName="pwd"
+                    >
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                  
+                    <mat-error *ngIf = " f.pwd.hasError('minlength') || f.pwd.errors?.required ">
+                        Veuillez saisir password min 8 caractére
+                    </mat-error> 
+                  </mat-form-field>
+
+
+            
+            <br><br> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+            <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid||notfound"> Ajouter </button>
+
+
+
+
+        </form>
+
+
+    </mat-card-content>
+</mat-card>
