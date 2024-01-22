@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.polytech.notes.models.Promotion;
 
 @Repository
-public interface PromotionRepository extends JpaRepository<Promotion, String>{
+public interface PromotionRepository extends JpaRepository<Promotion, Long>{
 
 	@Query("select distinct p.promo from Promotion p")
 	List<String> allPromotions();

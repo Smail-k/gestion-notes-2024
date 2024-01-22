@@ -59,4 +59,18 @@ public class NoteServiceDefault implements NoteService{
 	public List<Note> getListNoteByMatiereUnite(String code, String numero, String annee) {
 		return noteRepository.getListNoteMatieresOfUnite(code, numero, annee);
 	}
+
+	@Override
+	public Note ModifyNote(Long id, double note) {
+		Note n = noteRepository.findById(id).get();
+		if(n!=null)
+		{
+			n.setNote(note);
+			noteRepository.save(n);
+		}
+		return n;
+	}
+	
+	
+	
 }

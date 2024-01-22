@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 
 @Entity
@@ -17,9 +19,12 @@ public class Stage {
 	private int duree; 
 	private String societe; 
 	private String description;
+	private String dateDebut;
+	private String dateFin;
 	@OneToOne
 	private AnneeUniversitaire annee;
 	@OneToOne
-	private Etudiant etudiant; 
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	private Etudiant etudiant;  
 	
 }

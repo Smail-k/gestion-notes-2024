@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import com.polytech.notes.models.Etudiant;
 import com.polytech.notes.models.Mobilite;
 import com.polytech.notes.models.Note;
 import com.polytech.notes.models.RattrapageResponse;
+import com.polytech.notes.models.Stage;
 import com.polytech.notes.models.Unite;
 import com.polytech.notes.services.EtudiantService;
 import com.polytech.notes.services.NoteService;
@@ -38,21 +40,17 @@ public class EtudiantController {
 	
 	@PostMapping("/add")
 	public String addEtudiant(@RequestBody Etudiant e) {
-		etudiantService.saveEtudiant(e);
+		System.out.println(e.getPromotion().getId());
+		
+		Etudiant et =etudiantService.saveEtudiant(e);
+		System.out.println(et);
 		return "ajouté avec succés";
 	}
 	
 	@PostMapping("/modify")
-	public String modifyEtudiant(Long id,String numero,String nom,String prenom,int annee) {
-		Etudiant e=new Etudiant();
-		e.setId(id);
-		e.setNom(nom);
-		e.setPrenom(prenom);
-		e.setNumero(numero);
-		
-		
-		etudiantService.modifyEtudiant(e);
-		return "modifié avec succés";
+	public Etudiant modifyEtudiant(@RequestBody Etudiant e) {
+		System.out.println(e);
+		return etudiantService.modifyEtudiant(e);
 	}
 	
 	@GetMapping("/get/{numero}")
@@ -87,18 +85,24 @@ public class EtudiantController {
 		if(promo.toLowerCase().startsWith("3a")) {
 			System.out.println("hellooo---------------------");
 			List<Object[]> list= etudiantService.getNoteSemestre("SEM 5", promo, anneeUniv);
-			list.addAll(etudiantService.getNoteSemestre("SEM 6", promo, anneeUniv));
+			if(list!=null)
+				list.addAll(etudiantService.getNoteSemestre("SEM 6", promo, anneeUniv));
 			return list;
 		}else if(promo.toLowerCase().startsWith("4a"))
 		{
 			List<Object[]> list= etudiantService.getNoteSemestre("SEM 7", promo, anneeUniv);
-			list.addAll(etudiantService.getNoteSemestre("SEM 8", promo, anneeUniv));
+			//System.out.println(list);
+			if(list!=null)
+				list.addAll(etudiantService.getNoteSemestre("SEM 8", promo, anneeUniv));
+			
+			System.out.println(list+"-//////////////////////////////////");
 			return list;
 		}
 		else if(promo.toLowerCase().startsWith("5a"))
 		{
 			List<Object[]> list= etudiantService.getNoteSemestre("SEM 9", promo, anneeUniv);
-			list.addAll(etudiantService.getNoteSemestre("SEM 10", promo, anneeUniv));
+			if(list!=null)
+				list.addAll(etudiantService.getNoteSemestre("SEM 10", promo, anneeUniv));
 			return list;
 		}
 		return null;
@@ -159,7 +163,7 @@ public class EtudiantController {
 			etudiants.addAll(etudiantService.getEtudiantsMoyenneModules("5afisa", annee));
 			return etudiants;
 		}
-		return etudiantService.getEtudiantsMoyenneModules(promo, annee);
+		return etudiantService.getEtudiantsMoyenneModules(promo, annee); 
 	}
 	
 	//http://localhost:8080/api/etudiants/rattrapages/?annee=2023&promo=4afise
@@ -202,6 +206,21 @@ public class EtudiantController {
 	@PostMapping("/addMobilite")
 	public void mobilite(String numero,@RequestBody Mobilite mobilite){
 		etudiantService.setMobilite(numero,mobilite);
+	}
+
+	@GetMapping("/stage/etudiant")
+	public List<Stage> etudiantsStages(String numero){
+		//System.out.println(numero+"-----------------------------");
+		Etudiant e = etudiantService.getEtudiantByNumero(numero);
+		//System.out.println(e.getStages().size()+"-------");
+		if(e != null)  
+			return e.getStages();
+		return null;
+	}
+	
+	@GetMapping("/modify/note")
+	public Note modifyNoteEtudiant(Long id,double note) {
+		return noteService.ModifyNote(id, note);
 	}
 	
 }

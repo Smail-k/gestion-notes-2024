@@ -44,6 +44,8 @@ public class Promotion {
 	public void setAnnee(AnneeUniversitaire annee) {
 		this.annee = annee;
 	}
-
+public Long getId() {
+	return id;
+}
 	
 }

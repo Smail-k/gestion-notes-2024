@@ -21,4 +21,5 @@ public interface NoteService {
 	List<Note> getNoteByUnite(String u, String nom, String prenom);
 	Note getTotalNoteUnite(String unite, String nom, String prenom);
 	Note getNoteEtudiantBySession(String code, Session s, String numero);
+	Note ModifyNote(Long id,double note);
 }

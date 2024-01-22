@@ -36,7 +36,7 @@ public interface EtudiantRepository extends JpaRepository<Etudiant, Long>{
 			+ " e.promotion.promo=:promo AND e.promotion.annee.annee=:annee")// AND n.annee=:annee
 	List<Object[]> getListeEtudiantsMoyennesModules(String promo,String annee);
 	
-	@Query("select e.nom,e.prenom,e.numero,n.note,u.code from Etudiant e join e.notes n join n.unite u where n.matiere is NULL AND"
+	@Query("select e.nom,e.prenom,e.numero,n.note,u.code,n.id from Etudiant e join e.notes n join n.unite u where n.matiere is NULL AND"
 			+ " u.semestre.nom=:sem AND e.numero=:numero AND "
 			+ "e.promotion.promo=:promo AND e.promotion.annee.annee=:annee")// AND n.annee=:annee
 	List<Object[]> getEtudiantMoyennesModulesBySem(String promo,String annee,String sem,String numero);

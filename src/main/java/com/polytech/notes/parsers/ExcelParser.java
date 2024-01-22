@@ -59,14 +59,17 @@ public class ExcelParser {
 					u.setCode(row.getCell(1)+"");
 					u.setLibelle((row.getCell(2)+"").trim()+" "+(row.getCell(3)+"").trim());
 					u.setSemestre(s);
-					if(row.getCell(5)!= null &&  (row.getCell(5)+"").trim()!="")
+					System.out.println("-"+row.getCell(5)+"-");
+					if(row.getCell(5)!= null &&  (row.getCell(5)+"").trim()!="" && !(row.getCell(5)+"").equals(""))
 						u.setCoefficient(Double.parseDouble((row.getCell(5)+"").trim()));
+					else 
+						u.setCoefficient(Double.parseDouble(sheet.getRow(i+1).getCell(5)+""));
 					s.getUnites().add(u);
 					unites.add(u);
 					if(!row.getCell(3).toString().equals("")) {
 						Matiere m = new Matiere();
 						m.setLibelle(row.getCell(3)+"");
-						if(row.getCell(5)!= null &&  (row.getCell(5)+"").trim()!="")
+						if(row.getCell(5)!= null &&  (row.getCell(5)+"").trim()!="" && !(row.getCell(5)+"").equals(""))
 							m.setCoefficient(Double.parseDouble((row.getCell(5)+"").trim()));
 						m.setCode(row.getCell(1)+"");
 						m.setUnite(u);
@@ -84,7 +87,7 @@ public class ExcelParser {
 						m.setLibelle(row.getCell(2)+"");
 					}
 						
-					if(row.getCell(5)!= null &&  (row.getCell(5)+"").trim()!="")
+					if(row.getCell(5)!= null &&  (row.getCell(5)+"").trim()!="" && !(row.getCell(5)+"").equals(""))
 						m.setCoefficient(Double.parseDouble((row.getCell(5)+"").trim()));
 					if(row.getCell(1)!=null) {
 						u.getMatieres().add(m);
@@ -135,6 +138,10 @@ public class ExcelParser {
 		XSSFWorkbook workbook;
 		try {
 			workbook = new XSSFWorkbook(excel.getInputStream());
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "Error";
+		}
 			XSSFSheet sheet = workbook.getSheetAt(0);
 			XSSFRow row = sheet.getRow(0);
 //			int nbrMatieres = row.getPhysicalNumberOfCells(); 
@@ -160,7 +167,9 @@ public class ExcelParser {
 //			
 //			
 //			
+		System.out.println("helloo--------");
 			int nbrMatieres = row.getPhysicalNumberOfCells(); 
+			System.out.println(nbrMatieres);
 			for (int i = 3; i < nbrMatieres; i++) {
 				row = sheet.getRow(0);
 				Matiere m = new Matiere();
@@ -187,13 +196,10 @@ public class ExcelParser {
 					notes.add(note);
 				}
 			}
-			workbook.close();
+			//workbook.close();
 			return "success";
 			
-		} catch (IOException e) {
-			e.printStackTrace();
-			return "Error";
-		}
+		
 		
 	}
 	

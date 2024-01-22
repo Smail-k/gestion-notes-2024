@@ -15,5 +15,5 @@ public interface MatiereService {
 	List<Matiere> findMatiereByUnite(Unite u);
 	Matiere findMatiereByCode(String code);
 	List<Matiere> findAll();
-	
+	List<Matiere> matieresBySemestre(String sem);
 }

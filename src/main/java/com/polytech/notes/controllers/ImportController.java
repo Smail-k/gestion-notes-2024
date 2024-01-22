@@ -110,9 +110,16 @@ public class ImportController {
 		List<Note> notes = parser.getNotes();
 		Note test=null;
 		for (Note note : notes) {
-			Etudiant e = etudiantService.getEtudiantByNumero(note.getEtudiant().getNumero());
+			System.out.println(note.getEtudiant().getNumero()+"***************");
+			double doubleValue = Double.parseDouble(note.getEtudiant().getNumero());
+            long num = Math.round(doubleValue);
+			System.out.println(num);
+
+			Etudiant e = etudiantService.getEtudiantByNumero(num+"");
+			System.out.println(e.getNom()+"-----------------hnaa-----------------"+note.getMatiere().getCode()+"-");
 			note.setEtudiant(e);
-			note.setMatiere(matiereService.findMatiereByCode(note.getMatiere().getCode()));
+			note.setMatiere(matiereService.findMatiereByCode(note.getMatiere().getCode().trim()));
+			System.out.println(note.getMatiere()+"/*/*/*/*/*");
 			//note.setUnite(note.getMatiere().getUnite());
 			note.setAnnee(e.getPromotion().getAnnee().getAnnee());
 			note.setSituation(note.getNote()<6 ? false : true);

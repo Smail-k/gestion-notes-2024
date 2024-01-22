@@ -14,8 +14,8 @@ import lombok.Data;
 public class Mobilite {
 
 	private enum TypeMobilite{
-		stage,
 		etude,
+		stage,
 		autre
 	}
 	

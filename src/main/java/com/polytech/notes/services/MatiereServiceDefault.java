@@ -43,4 +43,9 @@ public class MatiereServiceDefault implements MatiereService{
 		return repository.findAll();
 	}
 
+	@Override
+	public List<Matiere> matieresBySemestre(String sem) {
+		return repository.getMatiereBySemestre(sem);
+	}
+
 }

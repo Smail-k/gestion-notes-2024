@@ -24,6 +24,12 @@ public class Etudiant {
 	private Long id;
 	private String nom;
 	private String prenom;
+	private boolean ppes;
+	private String description;
+	private boolean tierTemps;
+	private boolean boursier;
+	private String nationalite;
+	private String tele;
 	@Column(unique = true)
 	private String numero;
 	@OneToMany(targetEntity = Note.class,cascade = CascadeType.ALL)
@@ -37,7 +43,9 @@ public class Etudiant {
 	private Mobilite mobilite;
 	@OneToMany
 	@JoinColumn(name = "etudiant_id")
-	List<Stage> stages; 
+	private List<Stage> stages; 
+	
+	
 	
 	public Etudiant() {
 		super();

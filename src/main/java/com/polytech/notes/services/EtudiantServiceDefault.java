@@ -41,6 +41,13 @@ public class EtudiantServiceDefault implements EtudiantService{
 		existingEtudiant.setNumero(e.getNumero());
 		existingEtudiant.setPrenom(e.getPrenom());
 		existingEtudiant.setPromotion(e.getPromotion());
+		existingEtudiant.setBoursier(e.isBoursier());
+		existingEtudiant.setAnnee(e.getAnnee());
+		existingEtudiant.setDescription(e.getDescription());
+		existingEtudiant.setNationalite(e.getNationalite());
+		existingEtudiant.setPpes(e.isPpes());
+		existingEtudiant.setTierTemps(e.isTierTemps());
+		existingEtudiant.setTele(e.getTele());
 		repository.save(existingEtudiant);
 		return e;
 	}
@@ -114,7 +121,7 @@ public class EtudiantServiceDefault implements EtudiantService{
 			if(etudiant.getNumero().equals("1074172"))
 				System.out.println(notes+"---------------------------------------");
 			if(notes.size()==0)
-				return null;
+				continue;
 			for (Note note : notes) {
 				if(note.getUnite()!=null && note.getUnite().getSemestre().getNom().equals(sem) && note.getSession()==Session.normale) {//isSituation = validé
 					noteFinale+= note.getNote()*note.getUnite().getCoefficient();
