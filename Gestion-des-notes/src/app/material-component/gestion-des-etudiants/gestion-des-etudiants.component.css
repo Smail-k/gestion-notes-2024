@@ -1,0 +1,21 @@
+b{
+    color: black;
+    font-size: 30;
+}
+.green{
+    background-color: rgb(92, 199, 92);
+}
+#close {
+    display:inline-block;
+    padding:2px 5px;
+    background:#ebebeb;
+    margin-left: 50px;
+}
+
+#close:hover {
+  display:inline-block;
+  padding:2px 5px;
+  background:#f76262;
+  color:#fff;
+  cursor: pointer;
+}

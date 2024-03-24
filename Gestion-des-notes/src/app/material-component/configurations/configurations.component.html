@@ -1,0 +1,51 @@
+<div fxLayout="row">
+
+    <div fxFlex.gt-sm="100%">
+        <mat-card>
+            <mat-card-content>
+                <mat-card-title>CONFIGURATIONS</mat-card-title><br>
+
+                <button mat-raised-button color="primary" (click)="ajouter()">
+                    <mat-icon>settings</mat-icon>
+                    Nouvelle
+                </button>
+    <br><br>
+    <div class="mat-elevation-z8"> 
+        <mat-table [dataSource]='dataSource' matSort>
+        <ng-container matColumnDef="id"> 
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <b> Numero </b> </mat-header-cell>
+            <mat-cell *matCellDef="let configuration">{{configuration.id}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="libelle" > 
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <b> Libelle </b> </mat-header-cell>
+            <mat-cell *matCellDef="let configuration">{{configuration.libelle}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="seuil"> 
+            <mat-header-cell *matHeaderCellDef> <b> Seuil </b></mat-header-cell>
+            <mat-cell *matCellDef="let configuration">{{configuration.seuil}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="description"> 
+            <mat-header-cell *matHeaderCellDef> <b> Description </b></mat-header-cell>
+            <mat-cell *matCellDef="let configuration">{{configuration.description}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actions"> 
+            <mat-header-cell *matHeaderCellDef> <b> Actions </b></mat-header-cell>
+            <mat-cell *matCellDef="let configuration"> 
+
+                <button mat-icon-button color="warn">
+                    <mat-icon (click)="delete(configuration)" aria-label="delete button icon">delete</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+        
+        <mat-header-row *matHeaderRowDef= "displayedColumns" > </mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"> </mat-row>
+        </mat-table>  
+        <mat-paginator [pageSizeOptions]="[5,10,25,100]" [pageSize]="10" showFirstLastButtons> </mat-paginator> 
+        </div>
+    
+
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

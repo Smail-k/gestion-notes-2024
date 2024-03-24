@@ -1,0 +1,56 @@
+<div fxLayout="row">
+    <div fxFlex.gt-sm="100%">
+        <mat-card>
+            <mat-card-content>
+                <div class="d-flex no-block align-items-center b-b m-b-30 p-b-15">
+                    <h4 class="font-medium m-b-0 m-t-0">Stages </h4>
+                </div>
+                
+                <div class="mat-elevation-z8"> 
+                    <mat-table [dataSource]='dataSource' matSort>
+                    <ng-container matColumnDef="numero"> 
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> <b> Numero etu </b> </mat-header-cell>
+                        <mat-cell *matCellDef="let stage">{{this.data.numero}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="societe" > 
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> <b> Societe </b> </mat-header-cell>
+                        <mat-cell *matCellDef="let stage">{{stage.societe}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="convention" > 
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> <b> Nº convention </b> </mat-header-cell>
+                        <mat-cell *matCellDef="let stage">{{stage.numConvention}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="duree"> 
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> <b> Durée </b></mat-header-cell>
+                        <mat-cell *matCellDef="let stage">{{stage.duree }} sem</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="annee"> 
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> <b> Annee universitaire </b></mat-header-cell>
+                        <mat-cell *matCellDef="let stage">{{ stage.annee.annee }} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="dateDebut"> 
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> <b> Date début </b></mat-header-cell>
+                        <mat-cell *matCellDef="let stage">{{ stage.dateDebut }} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="dateFin"> 
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> <b> Date fin </b></mat-header-cell>
+                        <mat-cell *matCellDef="let stage">{{ stage.dateFin }} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="description" > 
+                        <mat-header-cell *matHeaderCellDef mat-sort-header > <b> Description </b></mat-header-cell>
+                        <mat-cell *matCellDef="let stage" style="text-align: right;">{{ stage.description }} </mat-cell>
+                    </ng-container>
+
+                    
+
+                    <mat-header-row *matHeaderRowDef= "displayedColumns" > </mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+                    </mat-table>  
+                    <mat-paginator [pageSizeOptions]="[5,10,25,100]" [pageSize]="10" showFirstLastButtons> </mat-paginator> 
+                    </div>
+
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

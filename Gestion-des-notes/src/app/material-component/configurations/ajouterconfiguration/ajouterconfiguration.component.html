@@ -1,0 +1,64 @@
+
+<h3 color="primary"> <mat-icon>person</mat-icon>
+    Ajouter un etudiant</h3>
+
+<mat-card >
+<mat-card-content >
+    <form class="form-horizontal" name="form" [formGroup]="form" (ngSubmit)="onSubmit();onAdd()">  
+
+         
+     
+        <mat-form-field class="exemple-form" >
+            <mat-label for="inputlibelle">libelle</mat-label>
+            <input type="text" matInput   formControlName="libelle"  placeholder="libelle "   >
+            <mat-icon matSuffix> </mat-icon>
+            <mat-error *ngIf = "f.libelle.errors?.required">
+                libelle est <strong> obligatoire</strong>
+                </mat-error>
+                <mat-error *ngIf = "f.libelle.errors?.pattern && f.libelle.touched">
+                    Veuillez saisir un libelle valide
+                </mat-error> 
+                <mat-icon (click)="f.libelle.setValue('')"  matSuffix style="color: #1f3a93;">clear</mat-icon>
+           </mat-form-field> 
+
+                
+           <mat-form-field class="exemple-form" >
+            <mat-label for="inputseuil">seuil</mat-label>
+            <input type="text" matInput   formControlName="seuil"  placeholder="seuil "   >
+            <mat-icon matSuffix> </mat-icon>
+            <mat-error *ngIf = "f.seuil.errors?.required">
+                seuil est <strong> obligatoire</strong>
+                </mat-error>
+                <mat-error *ngIf = "f.seuil.errors?.pattern && f.seuil.touched">
+                    Veuillez saisir un seuil valide Exemple : 9.5
+                </mat-error> 
+                <mat-icon (click)="f.seuil.setValue('')"  matSuffix style="color: #1f3a93;">clear</mat-icon>
+           </mat-form-field>
+           
+                         
+            <mat-form-field class="exemple-form" >
+                <mat-label for="inputdescription">description</mat-label>
+                <input type="text" matInput   formControlName="description"  placeholder="description "   >
+                <mat-icon matSuffix> </mat-icon>
+                <mat-error *ngIf = "f.description.errors?.required">
+                    description est <strong> obligatoire</strong>
+                    </mat-error>
+                    <mat-error *ngIf = "f.description.errors?.pattern && f.description.touched">
+                        Veuillez saisir un description valide
+                    </mat-error> 
+                    <mat-icon (click)="f.description.setValue('')"  matSuffix style="color: #1f3a93;">clear</mat-icon>
+               </mat-form-field>   
+       
+
+        
+        <br><br> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+        <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid"> Ajouter </button>
+
+
+
+
+    </form>
+
+
+</mat-card-content>
+</mat-card>

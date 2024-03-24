@@ -1,0 +1,110 @@
+
+<h3 color="primary"> <mat-icon>person</mat-icon>
+    Modifier Etudiant</h3>
+
+<mat-card >
+<mat-card-content >
+    <form class="form-horizontal" name="form" [formGroup]="form" (ngSubmit)="onSubmit();onAdd()">  
+
+         
+        <mat-form-field class="exemple-form"   >
+            <mat-label>Numero</mat-label>
+            <input type="text" 
+            matInput  
+            value="{{this.data.etudiant.numero}}"
+            readonly
+            >
+        </mat-form-field> 
+        
+        <mat-form-field class="exemple-form" >
+            <mat-label for="inputNom">Nom</mat-label>
+            <input type="text" matInput  placeholder="Nom" formControlName="nom">
+            <mat-icon matSuffix> </mat-icon>
+            <mat-error *ngIf = "f.nom.errors?.required">
+                Nom est <strong> obligatoire</strong>
+                </mat-error>
+                <mat-error *ngIf = "f.nom.errors?.pattern && f.nom.touched">
+                    Veuillez saisir un nom valide
+                </mat-error> 
+                <mat-icon (click)="f.nom.setValue('')"  matSuffix style="color: #1f3a93;">clear</mat-icon>
+        </mat-form-field> 
+           
+           
+           <mat-form-field class="exemple-form" >
+            <mat-label for="inputPrenom">Prenom</mat-label>
+            <input type="text" matInput placeholder="Prenom" formControlName="prenom">
+            <mat-icon matSuffix> </mat-icon>
+            <mat-error *ngIf = "f.prenom.errors?.required">
+                Prenom est <strong> obligatoire</strong>
+                </mat-error>
+                <mat-error *ngIf = "f.prenom.errors?.pattern && f.nom.touched">
+                    Veuillez saisir un nom valide
+                </mat-error> 
+                <mat-icon (click)="f.prenom.setValue('')"  matSuffix style="color: #1f3a93;">clear</mat-icon>
+         </mat-form-field> 
+
+         <mat-form-field class="exemple-form" >
+            <mat-label for="inputTele">Téléphone</mat-label>
+            <input type="text" matInput  placeholder="Telephone" formControlName="tele">
+            <mat-icon matSuffix> </mat-icon>
+            <mat-error *ngIf = "f.tele.errors?.required">
+                numero de téléphone est <strong> obligatoire</strong>
+                </mat-error>
+                <mat-error *ngIf = "f.tele.errors?.pattern && f.tele.touched">
+                    Veuillez saisir un numero de tele valide
+                </mat-error> 
+                <mat-icon (click)="f.tele.setValue('')"  matSuffix style="color: #1f3a93;">clear</mat-icon>
+        </mat-form-field> 
+           
+           <mat-form-field class="exemple-form" >
+            <mat-label for="inputAE">Annee d'entrée</mat-label>
+            <input type="text" matInput   formControlName="AE"  placeholder="AE "   >
+            <mat-icon matSuffix> </mat-icon>
+            <mat-error *ngIf = "f.AE.errors?.required">
+                Annee d'entrée est <strong> obligatoire</strong>
+                </mat-error>
+                <mat-error *ngIf = "f.AE.errors?.pattern && f.AE.touched">
+                    Veuillez saisir un Année d'entrée valide
+                </mat-error> 
+                <mat-icon (click)="f.AE.setValue('')"  matSuffix style="color: #1f3a93;">clear</mat-icon>
+           </mat-form-field>
+
+
+            <mat-form-field >
+                <mat-label>Année Universitaire</mat-label>
+                <select matNativeControl class="custom-select" formControlName="AU" (change)="ChargerPromotions()" >
+                  <option  selected aria-readonly="true"> Selectionner</option>
+                  <option *ngFor="let anneeU of annees" value="{{anneeU.annee}}">{{anneeU.annee}}</option>
+                </select>
+            </mat-form-field>
+
+            <mat-form-field >
+                <mat-label>Promotions</mat-label>
+                <select matNativeControl class="custom-select" formControlName="Promo" >
+                    <option  selected aria-readonly="true"> Selectionner</option>
+                  <option  *ngFor="let promotion of promotions" value="{{promotion}}" >{{promotion}}</option>
+                </select>
+            </mat-form-field>
+
+            <mat-form-field >
+                <mat-label>Nationnalité</mat-label>
+                <select matNativeControl class="custom-select" formControlName="nationalite">
+                  <option  selected aria-readonly="true"> Selectionner Nationnalité</option>
+                  <option *ngFor="let country of countries" value="{{country.name}}">{{country.name}}</option>
+                </select>
+            </mat-form-field>
+
+            <mat-checkbox class="example-margin" style="margin-right: 40px;" formControlName="boursier">boursier</mat-checkbox>
+            <mat-checkbox class="example-margin" style="margin-right: 40px;" formControlName="ppes">ppes</mat-checkbox>
+            <mat-checkbox class="example-margin" formControlName="tierTemps">tierTemps</mat-checkbox>
+<br>
+<br>
+<br>
+        <button mat-raised-button type="submit" mat-dialog-close style="display: block;margin: auto;" color="primary" [disabled]="!form.valid"> Modifier </button>
+
+
+    </form>
+
+
+</mat-card-content>
+</mat-card>

@@ -1,0 +1,8 @@
+b{
+    color: black;
+    font-size: 30;
+}
+:host ::ng-deep .mat-sort-header-container {
+    display: flex;
+    justify-content: center;
+ }

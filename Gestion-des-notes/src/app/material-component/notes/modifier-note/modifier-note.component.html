@@ -1,0 +1,14 @@
+<form class="form-horizontal" name="form" [formGroup]="form" (ngSubmit)="onModify()">
+
+         
+    <mat-form-field class="exemple-form"   >
+        <mat-label for="Note">Note</mat-label>
+        <input type="number" matInput  placeholder="Note" formControlName="note">
+    </mat-form-field> 
+    <br>
+    <br>
+    <br>
+    <button mat-raised-button type="submit" mat-dialog-close style="display: block;margin: auto;" color="primary" [disabled]="!form.valid"> Modifier </button>
+
+
+</form>

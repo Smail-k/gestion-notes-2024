@@ -1,0 +1,46 @@
+<!-- ============================================================== -->
+<!-- sidebar -->
+<!-- ============================================================== -->
+
+<!-- ============================================================== -->
+<!-- Afficher le dashboard dans le side bar-->
+<!-- ============================================================== -->
+
+
+<!-- <mat-accordion *ngFor="let menuitem of menuItems.getMenuitem()" >
+    <mat-expansion-panel hideToggle  class="disabled-pointer" >
+                <mat-expansion-panel-header [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link2' || menuitem.type==='stab' " >
+                    <mat-icon >{{ menuitem.icon }}</mat-icon>
+                    <span>{{ menuitem.name }}</span>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+</mat-accordion>
+
+
+<mat-accordion *ngFor="let menuitem of menuItems.getMenuitem()" >
+<mat-expansion-panel >
+            <mat-expansion-panel-header  *ngIf="menuitem.type === 'link1' " >
+                <mat-icon >{{ menuitem.icon }}</mat-icon>
+                <span>{{ menuitem.name }}</span>
+          </mat-expansion-panel-header>
+          <mat-nav-list  *ngFor="let submenu of menuitem.children">
+            <a mat-list-item [routerLink]="['/', submenu.state]">
+                <mat-icon>{{ submenu.icon }}</mat-icon>
+                <span>{{ submenu.name }}</span>
+            </a>
+        </mat-nav-list>
+        </mat-expansion-panel>
+</mat-accordion> -->
+
+<mat-nav-list appAccordion>
+    <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem()" routerLinkActive="selected" group="{{menuitem.state}}">
+        <a class="" appAccordionToggle [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link2'">
+            <mat-icon>{{ menuitem.icon }}</mat-icon> 
+            <span>{{ menuitem.name }}</span> 
+            <span fxFlex></span> 
+            <span class="label label-{{badge.type}}" *ngFor="let badge of menuitem.badge">{{badge.value}}</span> 
+        </a>
+    </mat-list-item>
+    
+</mat-nav-list>
+

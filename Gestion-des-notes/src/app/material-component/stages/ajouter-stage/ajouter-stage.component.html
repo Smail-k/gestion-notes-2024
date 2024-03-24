@@ -1,0 +1,65 @@
+
+<h3 color="primary">Stage</h3>
+
+<mat-card >
+<mat-card-content >
+    <form class="form-horizontal" [formGroup]="form" (ngSubmit)="onAdd()">
+
+
+        <mat-form-field class="exemple-form">
+            <mat-label for="inputSociete">Societe</mat-label>
+            <input type="text" matInput formControlName="societe" placeholder="Societe">
+            <mat-icon matSuffix> </mat-icon>
+        </mat-form-field>
+      
+        <mat-form-field class="exemple-form">
+          <mat-label for="inputVille">Ville</mat-label>
+          <input type="text" matInput formControlName="ville" placeholder="Ville">
+          <mat-icon matSuffix> </mat-icon>
+        </mat-form-field>
+        <mat-form-field class="exemple-form">
+            <mat-label for="inputAnnee">Année universitaire</mat-label>
+            <input type="text" matInput formControlName="AnneeUniversitaire" placeholder="annee universitaire">
+            <mat-icon matSuffix> </mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="exemple-form">
+          <mat-label for="inputNbrSem">Nombre de semaines</mat-label>
+          <input type="text" matInput formControlName="nbrSem" placeholder="Nombre de semaines" type="number">
+          <mat-icon matSuffix> </mat-icon>
+          <mat-error *ngIf = "f.nbrSem.errors?.outOfRange">
+            {{errorDuree}}
+        </mat-error>
+        </mat-form-field>        
+        <mat-form-field class="exemple-form">
+          <mat-label for="inputConvention">Nº Convention</mat-label>
+          <input type="text" matInput formControlName="numConvention" placeholder="numero de convention">
+          <mat-icon matSuffix> </mat-icon>
+        </mat-form-field>
+        <mat-form-field class="exemple-form">
+          <mat-label for="inputDateDebut">Date Début</mat-label>
+          <input type="date" matInput formControlName="dateDebut" placeholder="Date debut">
+          <mat-icon matSuffix> </mat-icon>
+        </mat-form-field>
+      
+        <mat-form-field class="exemple-form">
+          <mat-label for="inputDateFin">Date Fin</mat-label>
+          <input type="date" matInput formControlName="dateFin" placeholder="Date fin">
+          <mat-icon matSuffix> </mat-icon>
+        </mat-form-field>
+        <mat-form-field class="exemple-form">
+            <mat-label for="inputDescription">Description</mat-label>
+            <textarea matInput formControlName="description" placeholder="Description"></textarea>
+            <mat-icon matSuffix> </mat-icon>
+        </mat-form-field>
+        
+          
+        <br><br> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+        <button mat-raised-button mat-dialog-close style="display: block;margin: auto;" type="submit" color="primary"> Ajouter </button>
+
+      </form>
+      
+
+
+</mat-card-content>
+</mat-card>
